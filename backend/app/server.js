@@ -24,7 +24,7 @@ class Server {
   dbConnect () {
     // const host = 'mongodb://localhost:27017/social-networks' #Local connection
     const opts = { useNewUrlParser: true, useUnifiedTopology: true }
-    const host = 'mongodb+srv://root:test@cluster0-ijrao.gcp.mongodb.net/test?retryWrites=true&w=majority' // Atlas connection
+    const host = 'mongodb+srv://test:test@cluster0.jw0c4.mongodb.net/thesquareback?retryWrites=true&w=majority' // Atlas connection
     const connect = mongoose.createConnection(host, opts)
 
     connect.on('error', (err) => {
