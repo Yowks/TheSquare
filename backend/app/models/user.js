@@ -11,7 +11,7 @@ const Schema = new mongoose.Schema({
   rank: {type: Number},
   level: {type: Number},
   exp: {type: Number},
-  favorite_sport: {
+ /* favorite_sport: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Sport', 
     required: true
@@ -20,7 +20,8 @@ const Schema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Skins', 
     required: true
-  }
+  }*/
+  active:{type: Boolean, required:true, default: true}
 }, {
   collection: 'users',
   minimize: false,

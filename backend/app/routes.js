@@ -1,8 +1,8 @@
 const User = require('./controllers/user.js')
-const Event = require('./controllers/event.js')
+const Sport = require('./controllers/sport.js')
 
 
 module.exports = {
   User,
-  Event,
+  Sport,
 }

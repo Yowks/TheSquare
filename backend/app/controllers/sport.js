@@ -1,32 +1,30 @@
-const EventModel = require('../models/event.js')
-const UserModel = require('../models/user.js')
+const SportModel = require('../models/sport.js')
 /**
- * Event
+ * Sport
  * @class
  */
-class Event {
+class Sport {
   constructor (app, connect) {
     this.app = app
-    this.EventModel = connect.model('Event', EventModel)
-    this.UserModel = connect.model('User', UserModel)
+    this.SportModel = connect.model('Sport', SportModel)
 
-    this.create_event()
-    this.show_event()
-    this.search_event()
-    this.delete_event()
-    this.update_event()
+    this.create_sport()
+    this.show_sport()
+    this.search_sport()
+    this.delete_sport()
+    this.update_sport()
   }
 
   /**
-   * Show an event
-   * @Endpoint : /event/{id}/show
+   * Show an sport
+   * @Endpoint : /v1/sport/{id}
    * @Method : GET
    */
-  show_event () {
-    this.app.get('/event/:id/show', (req, res) => {
+  show_sport () {
+    this.app.get('/v1/sport/:id', (req, res) => {
       try {
-        this.EventModel.findById(req.params.id).populate("administrator, members, staff").then(event => {
-          res.status(200).json(event || {})
+        this.SportModel.findById(req.params.id).then(sport => {
+          res.status(200).json(sport || {})
         }).catch(err => {
           res.status(500).json({
             code: 500,
@@ -43,17 +41,17 @@ class Event {
   }
 
   /**
-   * Delete an event
-   * @Endpoint : /event/{id}/delete
+   * Delete an sport
+   * @Endpoint : /v1/sport/{id}/delete
    * @Method : DELETE
    */
-  delete_event () {
-    this.app.delete('/event/:id/delete', (req, res) => {
+  delete_sport () {
+    this.app.delete('/v1/sport/:id/delete', (req, res) => {
       try {
-        this.EventModel.findByIdAndRemove(req.params.id).then(event => {
+        this.SportModel.findByIdAndRemove(req.params.id).then(sport => {
           res.status(200).json({
               code: 200,
-              message: "Event succesfully deleted"
+              message: "Sport succesfully deleted"
             }
           )
         }).catch(err => {
@@ -72,15 +70,15 @@ class Event {
   }
 
   /**
-   * Update an event
-   * @Endpoint : /event/{id}/update
+   * Update an sport
+   * @Endpoint : /v1/sport/{id}/update
    * @Method : PUT
    */
-  update_event () {
-    this.app.put('/event/:id/update', (req, res) => {
+  update_sport () {
+    this.app.put('/v1/sport/:id/update', (req, res) => {
       try {
-        this.EventModel.findByIdAndUpdate(req.params.id, req.body).then(event => {
-          res.status(200).json(event || {})
+        this.SportModel.findByIdAndUpdate(req.params.id, req.body).then(sport => {
+          res.status(200).json(sport || {})
         }).catch(err => {
           res.status(500).json({
             code: 500,
@@ -97,17 +95,17 @@ class Event {
   }
 
   /**
-   * Create an event
-   * @Endpoint : /event/create
+   * Create an sport
+   * @Endpoint : /v1/sport/create
    * @Method : POST
    */
-  create_event () {
-    this.app.post('/event/create', (req, res) => {
+  create_sport () {
+    this.app.post('/v1/sport/create', (req, res) => {
       try {
-        const eventModel = this.EventModel(req.body)
+        const sportModel = this.SportModel(req.body)
         
-        eventModel.save().then(event => {
-          res.status(200).json(event || {})
+        sportModel.save().then(sport => {
+          res.status(200).json(sport || {})
         }).catch(err => {
           res.status(500).json({
             code: 500,
@@ -124,15 +122,15 @@ class Event {
   }
 
 /**
-   * Show all the events
-   * @Endpoint : /event/search
+   * Show all the sports
+   * @Endpoint : /v1/sport/search
    * @Method : GET
    */
-  search_event () {
-    this.app.get('/event/search', (req, res) => {
+  search_sport () {
+    this.app.get('/v1/sport/search', (req, res) => {
       try {
-        this.EventModel.find({}).populate("administrator, members, staff").then(event => {
-          res.status(200).json(event || {})
+        this.SportModel.find({}).populate("administrator, members, staff").then(sport => {
+          res.status(200).json(sport || {})
         }).catch(err => {
           res.status(500).json({
             code: 500,
@@ -149,4 +147,4 @@ class Event {
   }
 }
 
-module.exports = Event
+module.exports = Sport

@@ -18,11 +18,11 @@ class User {
 
   /**
 	* Get an user
-	* @Endpoint : /user/{id}/show
+	* @Endpoint : /user/{id}
 	* @Method : GET
 	*/
   show_user () {
-    this.app.get('/v1/user/:id/show', (req, res) => {
+    this.app.get('/v1/user/:id', (req, res) => {
       try {
         this.UserModel.findById(req.params.id).then(user => {
           res.status(200).json(user || {})
@@ -118,7 +118,7 @@ class User {
           // Mail existant
           res.status(403).json({
             code: 403,
-            message: 'Email already exists'
+            message: 'Email, phone or nickname already exists'
           }) 
         }) 
       } catch (err) {

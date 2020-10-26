@@ -71,7 +71,7 @@ class Server {
     })
 
     new routes.User(this.app, this.connect)
-    new routes.Event(this.app, this.connect)
+    new routes.Sport(this.app, this.connect)
 
     this.app.use((req, res) => {
       res.status(404).json({
