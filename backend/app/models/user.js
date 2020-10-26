@@ -3,13 +3,23 @@ const mongoose = require('mongoose')
 const Schema = new mongoose.Schema({
   first_name: {type: String,required: true},
   last_name: {type: String,required: true},
+  nickname: {type: String, unique: true, required: true},
   email: {type: String, unique:true, required: true},
+  phone_number: {type: String, unique:true},
   password: {type: String,required: true},
-  age: {type: Number,required: true},
-  phone: {type: String,required: true},
-  image_profil: {
-    type: String,
-    default: 'https://pbs.twimg.com/profile_images/1126137112825335808/L5WvNz8W_400x400.jpg'
+  age: {type: Number},
+  rank: {type: Number},
+  level: {type: Number},
+  exp: {type: Number},
+  favorite_sport: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Sport', 
+    required: true
+  },
+  skins: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Skins', 
+    required: true
   }
 }, {
   collection: 'users',

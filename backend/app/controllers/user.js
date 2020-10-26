@@ -22,7 +22,7 @@ class User {
 	* @Method : GET
 	*/
   show_user () {
-    this.app.get('/user/:id/show', (req, res) => {
+    this.app.get('/v1/user/:id/show', (req, res) => {
       try {
         this.UserModel.findById(req.params.id).then(user => {
           res.status(200).json(user || {})
@@ -47,7 +47,7 @@ class User {
 	* @Method : DELETE
 	*/
   delete_user () {
-    this.app.delete('/user/:id/delete', (req, res) => {
+    this.app.delete('/v1/user/:id/delete', (req, res) => {
       try {
         this.UserModel.findByIdAndRemove(req.params.id).then(user => {
           res.status(200).json({
@@ -75,7 +75,7 @@ class User {
 	* @Method : PUT
 	*/
   update_user () {
-    this.app.put('/user/:id/update', (req, res) => {
+    this.app.put('/v1/user/:id/update', (req, res) => {
       try {
         this.UserModel.findByIdAndUpdate(req.params.id, req.body).then(user => {
           res.status(200).json(user || {})
@@ -100,7 +100,7 @@ class User {
 	* @Method : POST
 	*/
   create_user () {
-    this.app.post('/user/create', (req, res) => {
+    this.app.post('/v1/user/create', (req, res) => {
       try {
         const userModel = this.UserModel(req.body)
         this.UserModel.find({email: req.body.email}).then(result => {
@@ -136,7 +136,7 @@ class User {
 	* @Method : GET
 	*/
   search_user () {
-    this.app.get('/user/search', (req, res) => {
+    this.app.get('/v1/user/search', (req, res) => {
       try {
         const pipe = [{ $limit: req.body.limit || 10 }]
 
