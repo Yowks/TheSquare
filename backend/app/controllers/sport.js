@@ -129,7 +129,7 @@ class Sport {
   search_sport () {
     this.app.get('/v1/sport/search', (req, res) => {
       try {
-        this.SportModel.find({}).populate("administrator, members, staff").then(sport => {
+        this.SportModel.find({}).then(sport => {
           res.status(200).json(sport || {})
         }).catch(err => {
           res.status(500).json({
